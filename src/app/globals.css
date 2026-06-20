@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* Class-based dark mode ("Vespers" theme) instead of prefers-color-scheme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — "Modern Scriptorium"                               */
+/*  Light = Parchment · Dark = Vespers (reading by candlelight)        */
+/* ------------------------------------------------------------------ */
+:root {
+  --paper: #f4eee2;
+  --paper-2: #ece3d2;
+  --card: #fbf7ef;
+  --card-2: #f6f0e4;
+  --ink: #211b12;
+  --ink-soft: #57503f;
+  --ink-faint: #8a816d;
+  --line: #e5dac6;
+  --line-soft: #efe7d7;
+
+  --gold: #a9772a;
+  --gold-bright: #c99a3f;
+  --ember: #c0542b;
+  --lapis: #2e5078;
+  --rubric: #a23b2c;
+  --sage: #3e6b57;
+  --plum: #6e4063;
+
+  --shadow-color: 38 28 14;
+  --grain-opacity: 0.05;
+}
+
+.dark {
+  --paper: #14110b;
+  --paper-2: #100d08;
+  --card: #1e1810;
+  --card-2: #241d13;
+  --ink: #efe6d2;
+  --ink-soft: #b0a488;
+  --ink-faint: #7c7257;
+  --line: #332a1c;
+  --line-soft: #2a2317;
+
+  --gold: #d8ac52;
+  --gold-bright: #eccb7c;
+  --ember: #e07746;
+  --lapis: #6e97cf;
+  --rubric: #d26a56;
+  --sage: #6fa98b;
+  --plum: #b07fa6;
+
+  --shadow-color: 0 0 0;
+  --grain-opacity: 0.08;
+}
+
+/* Map tokens to Tailwind color/font utilities. `inline` resolves the
+   var at the point of use so .dark overrides flow through cleanly. */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-ember: var(--ember);
+  --color-lapis: var(--lapis);
+  --color-rubric: var(--rubric);
+  --color-sage: var(--sage);
+  --color-plum: var(--plum);
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-card: 1.25rem;
+
+  --shadow-soft: 0 1px 2px rgb(var(--shadow-color) / 0.04),
+    0 8px 24px -12px rgb(var(--shadow-color) / 0.12);
+  --shadow-lift: 0 2px 4px rgb(var(--shadow-color) / 0.05),
+    0 18px 48px -18px rgb(var(--shadow-color) / 0.22);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--gold) 30%, transparent);
+    color: var(--ink);
+  }
+
+  *:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--gold) 70%, transparent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Slim, warm scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--ink-faint) 40%, transparent)
+      transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--ink-faint) 35%, transparent);
+    border-radius: 999px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reusable atmosphere utilities                                      */
+/* ------------------------------------------------------------------ */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Glowing gold text used for emphasis & numbers */
+  .text-gilded {
+    color: var(--gold);
+    background-image: linear-gradient(
+      100deg,
+      var(--gold) 0%,
+      var(--gold-bright) 45%,
+      var(--gold) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .surface {
+    background-color: var(--card);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .surface-2 {
+    background-color: var(--card-2);
+    border: 1px solid var(--line-soft);
+  }
+
+  /* Faint ruled-paper / manuscript margin line */
+  .ruled {
+    background-image: linear-gradient(
+      to bottom,
+      transparent calc(1.9rem - 1px),
+      color-mix(in oklab, var(--line) 60%, transparent) calc(1.9rem - 1px),
+      color-mix(in oklab, var(--line) 60%, transparent) 1.9rem,
+      transparent 1.9rem
+    );
+    background-size: 100% 1.9rem;
+  }
+
+  .hairline {
+    border-color: var(--line);
+  }
+
+  /* Radial candle-glow, used behind hero elements */
+  .glow-gold {
+    background: radial-gradient(
+      120% 120% at 50% 0%,
+      color-mix(in oklab, var(--gold) 22%, transparent) 0%,
+      transparent 60%
+    );
+  }
+
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    45% {
+      opacity: 0.86;
+      transform: scale(0.97) translateY(0.5px);
+    }
+    70% {
+      opacity: 0.95;
+      transform: scale(1.02);
+    }
+  }
+  .animate-flicker {
+    animation: flicker 3.2s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-rise {
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
