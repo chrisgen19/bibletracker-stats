@@ -4,53 +4,53 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ------------------------------------------------------------------ */
-/*  Design tokens — "Modern Scriptorium"                               */
-/*  Light = Parchment · Dark = Vespers (reading by candlelight)        */
+/*  Design tokens — Anthropic palette                                  */
+/*  Light = Ivory · Dark = Slate · accent = Clay (Book Cloth)          */
 /* ------------------------------------------------------------------ */
 :root {
-  --paper: #f4eee2;
-  --paper-2: #ece3d2;
-  --card: #fbf7ef;
-  --card-2: #f6f0e4;
-  --ink: #211b12;
-  --ink-soft: #57503f;
-  --ink-faint: #8a816d;
-  --line: #e5dac6;
-  --line-soft: #efe7d7;
+  --paper: #f0eee6; /* Anthropic Ivory */
+  --paper-2: #e8e5db;
+  --card: #faf9f5; /* warm near-white card */
+  --card-2: #f2f0e8;
+  --ink: #1a1915; /* Slate near-black */
+  --ink-soft: #4c4a42;
+  --ink-faint: #87836f;
+  --line: #e4e0d4;
+  --line-soft: #efece2;
 
-  --gold: #a9772a;
-  --gold-bright: #c99a3f;
-  --ember: #c0542b;
-  --lapis: #2e5078;
-  --rubric: #a23b2c;
-  --sage: #3e6b57;
-  --plum: #6e4063;
+  --gold: #cc785c; /* Clay / Book Cloth — primary accent */
+  --gold-bright: #e09a80;
+  --ember: #cf6a42; /* warm terracotta — "today" / flame */
+  --lapis: #4a6b8a;
+  --rubric: #b14a36;
+  --sage: #5a7d63;
+  --plum: #8a5f73;
 
-  --shadow-color: 38 28 14;
-  --grain-opacity: 0.05;
+  --shadow-color: 40 30 18;
+  --grain-opacity: 0.04;
 }
 
 .dark {
-  --paper: #14110b;
-  --paper-2: #100d08;
-  --card: #1e1810;
-  --card-2: #241d13;
-  --ink: #efe6d2;
-  --ink-soft: #b0a488;
-  --ink-faint: #7c7257;
-  --line: #332a1c;
-  --line-soft: #2a2317;
+  --paper: #1f1e1a; /* warm Slate */
+  --paper-2: #1a1916;
+  --card: #272621;
+  --card-2: #2d2c26;
+  --ink: #f0eee6; /* Ivory text */
+  --ink-soft: #bdb9ac;
+  --ink-faint: #837f6e;
+  --line: #3a3833;
+  --line-soft: #302f29;
 
-  --gold: #d8ac52;
-  --gold-bright: #eccb7c;
-  --ember: #e07746;
-  --lapis: #6e97cf;
-  --rubric: #d26a56;
-  --sage: #6fa98b;
-  --plum: #b07fa6;
+  --gold: #db9070; /* brighter Clay on dark */
+  --gold-bright: #ecb59a;
+  --ember: #e08a6a;
+  --lapis: #7e9fc4;
+  --rubric: #d8806c;
+  --sage: #84ad8f;
+  --plum: #bf94a8;
 
   --shadow-color: 0 0 0;
-  --grain-opacity: 0.08;
+  --grain-opacity: 0.06;
 }
 
 /* Map tokens to Tailwind color/font utilities. `inline` resolves the
